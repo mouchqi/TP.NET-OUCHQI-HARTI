@@ -1,0 +1,93 @@
+﻿@using ASP.Server.Model
+@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<body>
+    <h1>Liste des Livres</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="tableau table  table-striped table-bordered">
+                <thead class="tr-custom">
+                    <tr class="custom-th">
+                        <th class="th-code">Name</th>
+                        <th class="th-produit">Author</th>
+                        <th class="th-name">prix</th>
+                        <th class="th-name">content</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var book in Model)
+
+                    {
+                        <tr class="td-custom" tabindex="0">
+                            <td>@book.Name</td>
+                            <td>@book.Author</td>
+                            <td>@book.Price</td>
+                            <td>@book.Content</td>
+                            
+
+                            <td>
+                                <form asp-controller="Book" asp-action="RemoveBook">
+                                    <input type="hidden" value="@book.Id" name="bookId">
+                                    <input class="dele" type="submit" value="Delete" style="width: 100%;" />
+                                </form>
+
+                                <form asp-controller="Book" asp-action="RedirectUpdateBook">
+                                    <input type="hidden" value="@book.Id" name="bookId">
+                                    <input class="upd" type="submit" value="Update" style="width: 100%;" />
+                                </form>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+<style>
+    body{
+        background: rgb(183,182,200);
+        background: linear-gradient(90deg, rgba(183,182,200,1) 0%, rgba(145,145,182,1) 35%, rgba(62,133,149,1) 100%);
+    }
+
+    .upd{
+        background: rgb(149,85,81);
+        background: radial-gradient(circle, rgba(149,85,81,1) 0%, rgba(0,0,0,1) 100%);
+        border-radius: 8px;
+        padding: 14px 40px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+       
+    }
+
+    .dele{
+        background: rgb(149,85,81);
+        background: radial-gradient(circle, rgba(149,85,81,1) 0%, rgba(0,0,0,1) 100%);
+        border-radius: 8px;
+        padding: 14px 40px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+       
+    }
+
+    h1{
+        position: center;
+        font-size: 2vw;
+        color: #252839;
+        -webkit-text-stroke: 0.3vw #383d52;
+        text-transform: uppercase;
+    }
+
+
+</style>
+
+

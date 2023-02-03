@@ -1,0 +1,96 @@
+﻿@using ASP.Server.Model
+
+@model IEnumerable<Genre>
+@{
+    ViewData["Title"] = "Liste Genre";
+}
+
+<style>
+    body{
+        background: rgb(183,182,200);
+        background: linear-gradient(90deg, rgba(183,182,200,1) 0%, rgba(145,145,182,1) 35%, rgba(62,133,149,1) 100%);
+    }
+
+    .upd{
+        background: rgb(149,85,81);
+        background: radial-gradient(circle, rgba(149,85,81,1) 0%, rgba(0,0,0,1) 100%);
+        border-radius: 8px;
+        padding: 14px 40px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+       
+    }
+
+    .dele{
+        background: rgb(149,85,81);
+        background: radial-gradient(circle, rgba(149,85,81,1) 0%, rgba(0,0,0,1) 100%);
+        border-radius: 8px;
+        padding: 14px 40px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+       
+    }
+    h1{
+        position : center;
+        font-size: 2vw;
+        color: #252839;
+        -webkit-text-stroke: 0.3vw #383d52;
+        text-transform: uppercase;
+    }
+
+
+</style>
+
+
+
+
+
+
+
+
+<body>
+    <div class="listeGenres">
+        <h1 class="title">Liste des Genres:</h1>
+        <div class="row">
+            <div class="col-12">
+                <table class="tableau table  table-striped table-bordered">
+                    <thead class="tr-custom">
+                        <tr class="custom-th">
+                            <th class="th-code">Name</th>
+                            <th class="th-produit">Description</th>
+                            <th class="th-produit">Action</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var genre in Model)
+
+                        {
+                            <tr class="td-custom" tabindex="0">
+                                <td>@genre.Name</td>
+                                <td>@genre.Description</td>
+                                <td>
+                                    <form asp-controller="Genre" asp-action="RemoveGenre">
+                                        <input type="hidden" value="@genre.Id" name="genreId">
+                                        <input class="dele" type="submit" value="Delete" style="width: 100%;" />
+                                    </form>
+
+                                    <form asp-controller="Genre" asp-action="RedirectUpdateGenre">
+                                        <input type="hidden" value="@genre.Id" name="genreId">
+                                        <input class="upd" type="submit" value="Update" style="width: 100%;" />
+                                    </form>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
